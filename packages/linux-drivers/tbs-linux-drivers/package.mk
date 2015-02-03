@@ -17,7 +17,7 @@
 ################################################################################
 
 PKG_NAME="tbs-linux-drivers"
-PKG_VERSION="150130"
+PKG_VERSION="141225"
 PKG_REV="1"
 PKG_ARCH="i386 x86_64"
 PKG_LICENSE="GPL"
@@ -49,4 +49,6 @@ make_target() {
 makeinstall_target() {
   mkdir -p $INSTALL/lib/modules/$(get_module_dir)/updates/tbs
   find $ROOT/$PKG_BUILD/linux-tbs-drivers/ -name \*.ko -exec cp {} $INSTALL/lib/modules/$(get_module_dir)/updates/tbs \;
+  mkdir -p $INSTALL/lib/firmware/
+  cp $ROOT/$PKG_BUILD/*.fw $INSTALL/lib/firmware/
 }
