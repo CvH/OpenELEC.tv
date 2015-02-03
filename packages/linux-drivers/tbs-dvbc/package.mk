@@ -16,30 +16,24 @@
 #  along with OpenELEC.  If not, see <http://www.gnu.org/licenses/>.
 ################################################################################
 
-PKG_NAME="tbs-linux-drivers-dvbc"
+PKG_NAME="tbs-dvbc"
 PKG_VERSION="150130"
 PKG_REV="1"
 PKG_ARCH="i386 x86_64"
 PKG_LICENSE="GPL"
 PKG_SITE="http://www.tbsdtv.com/english/Download.html"
-PKG_URL="http://mycvh.de/openelec/tbs-linux-drivers-dvbc_v${PKG_VERSION}.zip"
-PKG_SOURCE_DIR="$PKG_NAME"
+PKG_URL="http://mycvh.de/openelec/tbs-dvbc-${PKG_VERSION}.tar.xz"
 PKG_DEPENDS_TARGET="toolchain linux"
 PKG_NEED_UNPACK="$LINUX_DEPENDS"
 PKG_PRIORITY="optional"
 PKG_SECTION="driver"
-PKG_SHORTDESC="Linux TBS tuner drivers"
-PKG_LONGDESC="Linux TBS tuner drivers"
+PKG_SHORTDESC="Official Linux TBS tuner drivers"
+PKG_LONGDESC="Official Linux TBS tuner drivers"
 PKG_IS_ADDON="no"
 PKG_AUTORECONF="no"
 
-post_unpack() {
-  tar xjf $ROOT/$PKG_BUILD/linux-tbs-drivers.tar.bz2 -C $ROOT/$PKG_BUILD
-  chmod -R u+rwX $ROOT/$PKG_BUILD/linux-tbs-drivers/*
-}
-
 make_target() {
-  cd $ROOT/$PKG_BUILD/linux-tbs-drivers
+  cd $ROOT/$PKG_BUILD
   [ "$TARGET_ARCH" = "i386" ] && ./v4l/tbs-x86_r3.sh && ./v4l/tbs-dvbc-x86_r3.sh
   [ "$TARGET_ARCH" = "x86_64" ] && ./v4l/tbs-x86_64.sh && ./v4l/tbs-dvbc-x86_64.sh
   LDFLAGS="" make DIR=$(kernel_path) prepare
@@ -48,5 +42,5 @@ make_target() {
 
 makeinstall_target() {
   mkdir -p $INSTALL/lib/modules/$(get_module_dir)/updates/tbs
-  find $ROOT/$PKG_BUILD/linux-tbs-drivers/ -name \*.ko -exec cp {} $INSTALL/lib/modules/$(get_module_dir)/updates/tbs \;
+  find $ROOT/$PKG_BUILD/ -name \*.ko -exec cp {} $INSTALL/lib/modules/$(get_module_dir)/updates/tbs \;
 }
