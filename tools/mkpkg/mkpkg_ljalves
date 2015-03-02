@@ -26,7 +26,7 @@ rm -rf ljalves-*
 # media_build dl
 echo "getting media_build sources ..."
   if [ ! -d media_build.git ]; then
-    git clone --depth=1 git://linuxtv.org/media_build.git ljalves/media_build
+    git clone https://github.com/ljalves/media_build.git ljalves/media_build
   fi
 
 echo "cleaning media_build sources ..."
