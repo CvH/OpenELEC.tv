@@ -2,9 +2,9 @@
 
 # version of tbs drivers
 # see http://www.tbsdtv.com/download/ for rescent version
-# http://www.tbsdtv.com/download/document/common/linux-tbs-drivers_150130.tar.bz2 for example 150130
+# http://www.tbsdtv.com/download/document/common/tbs-linux-drivers_v150313.zip for example 150313
 
-PKG_VERSION="150130"
+PKG_VERSION="150313"
 
 
 echo "\n\n\n remove old sources \n\n\n"
@@ -16,11 +16,13 @@ echo "\n\n\n remove old sources \n\n\n"
 echo "getting sources... \n\n\n"
   mkdir tbs
   cd tbs/
-  wget http://www.tbsdtv.com/download/document/common/linux-tbs-drivers_${PKG_VERSION}.tar.bz2
+  wget http://www.tbsdtv.com/download/document/common/tbs-linux-drivers_v${PKG_VERSION}.zip
+  unzip tbs-linux-drivers_v${PKG_VERSION}.zip linux-tbs-drivers.tar.bz2
 
 
 echo "unpack sources... \n\n\n"
-  tar xjvf linux-tbs-drivers_${PKG_VERSION}.tar.bz2
+
+  tar xjvf linux-tbs-drivers.tar.bz2
   chmod -R u+rwX linux-tbs-drivers/*
   mv linux-tbs-drivers/ tbs-${PKG_VERSION}/
 
