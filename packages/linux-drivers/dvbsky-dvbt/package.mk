@@ -17,11 +17,11 @@
 ################################################################################
 
 PKG_NAME="dvbsky-dvbt"
-PKG_VERSION="150211"
+PKG_VERSION="150322"
 PKG_REV="1"
 PKG_ARCH="i386 x86_64"
 PKG_LICENSE="GPL"
-PKG_SITE="http://www.dvbsky.net/Support.html"
+PKG_SITE="http://www.dvbsky.net/Support_linux.html"
 PKG_URL="http://mycvh.de/openelec/dvbsky-dvbt-${PKG_VERSION}.tar.xz"
 PKG_DEPENDS_TARGET=""
 PKG_BUILD_DEPENDS_TARGET="toolchain linux"
