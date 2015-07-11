@@ -19,16 +19,18 @@
 ################################################################################
 
 PKG_NAME="media_build"
-PKG_VERSION="3a36768"
-# latest !!! DANGER !!!
+PKG_VERSION="46eba69"
+
+# choose "LATEST" or a date like "2014-12-01-e8bd888" for the driver package
+# chose from here http://linuxtv.org/downloads/drivers/
+
 MEDIA_BUILD_VERSION="LATEST"
-# normal - stable and working
-# MEDIA_BUILD_VERSION="2014-12-01-e8bd888"
+
 PKG_REV="1"
 PKG_ARCH="any"
 PKG_LICENSE="GPL"
 PKG_SITE="http://git.linuxtv.org/media_build.git"
-PKG_URL="http://mycvh.de/openelec/media_build-${PKG_VERSION}.tar.xz"
+PKG_URL="http://mycvh.de/openelec/$PKG_NAME/$PKG_NAME-${PKG_VERSION}.tar.xz"
 PKG_DEPENDS_TARGET=""
 PKG_BUILD_DEPENDS_TARGET="toolchain linux"
 PKG_PRIORITY="optional"
@@ -46,11 +48,9 @@ pre_make_target() {
 
 make_target() {
   $SED -i  -e "/^LATEST_TAR/s/-LATEST/-$MEDIA_BUILD_VERSION/g" linux/Makefile
-
   make VER=$KERNEL_VER SRCDIR=$(kernel_path) -C linux/ download
   make VER=$KERNEL_VER SRCDIR=$(kernel_path) -C linux/ untar
   make VER=$KERNEL_VER SRCDIR=$(kernel_path) stagingconfig
-#  make VER=$KERNEL_VER SRCDIR=$(kernel_path) allyesconfig
   make VER=$KERNEL_VER SRCDIR=$(kernel_path)
 }
 
