@@ -14,6 +14,9 @@
 # Root password to integrate in the target system
   ROOT_PASSWORD="openelec"
 
+# Install glibc locales to the build (yes / no)
+  GLIBC_LOCALES="yes"
+
 # Mediacenter to use (kodi / no)
   MEDIACENTER="kodi"
 
@@ -27,6 +30,9 @@
 
 # install extra subtitle Fonts for KODI (yes / no)
   KODI_EXTRA_FONTS="yes"
+
+# build and install PulseAudio support (yes / no)
+  PULSEAUDIO_SUPPORT="yes"
 
 # build and install espeak support (yes / no)
   ESPEAK_SUPPORT="yes"
@@ -54,7 +60,7 @@
 # for a list of additinoal drivers see packages/linux-drivers
 # Space separated list is supported,
 # e.g. ADDITIONAL_DRIVERS="DRIVER1 DRIVER2"
-  ADDITIONAL_DRIVERS="RTL8192CU RTL8192DU RTL8188EU RTL8812AU dvbhdhomerun"
+  ADDITIONAL_DRIVERS="RTL8192CU RTL8192DU RTL8192EU RTL8188EU RTL8812AU dvbhdhomerun"
 
 # build and install bluetooth support (yes / no)
   BLUETOOTH_SUPPORT="yes"
@@ -121,7 +127,7 @@
 # Xorg Graphic drivers to use (all / i915,i965,r200,r300,r600,nvidia)
 # Space separated list is supported,
 # e.g. GRAPHIC_DRIVERS="i915 i965 r300 r600 radeonsi nvidia"
-  GRAPHIC_DRIVERS="r300 r600 radeonsi i915 i965 nvidia"
+  GRAPHIC_DRIVERS="r300 r600 radeonsi i915 i965 nvidia nvidia-legacy"
 
 # build and install remote support (yes / no)
   REMOTE_SUPPORT="yes"
@@ -143,7 +149,7 @@
 
 # LCD driver to Use - Possible drivers are ( Comma seperated:
 # bayrad,CFontz,CFontz633,CFontzPacket,curses,CwLnx,dm140,
-# ea65,EyeboxOne,g15,glcdlib,glk,hd44780,i2500vfd,
+# ea65,EyeboxOne,g15,glcd,glcdlib,glk,hd44780,i2500vfd,
 # icp_a106,imon,imonlcd,IOWarrior,irman,irtrans,
 # joy,lb216,lcdm001,lcterm,lirc,lis,MD8800,mdm166a,
 # ms6931,mtc_s16209x,MtxOrb,mx5000,NoritakeVFD,
