@@ -1,0 +1,48 @@
+#!/bin/sh
+
+# version of tbs drivers
+# see http://www.tbsdtv.com/download/ for rescent version
+# http://www.tbsdtv.com/download/document/common/tbs-linux-drivers_v150313.zip for example 150313
+
+PKG_VERSION="160219"
+
+
+echo "\n\n\n remove old sources \n\n\n"
+  rm -rf tbs/
+  rm tbs-${PKG_VERSION}.tar.xz
+  rm tbs-dvbc-${PKG_VERSION}.tar.xz
+
+
+echo "getting sources... \n\n\n"
+  mkdir tbs
+  cd tbs/
+  wget http://www.tbsdtv.com/download/document/common/tbs-linux-drivers_v${PKG_VERSION}.zip
+  unzip tbs-linux-drivers_v${PKG_VERSION}.zip linux-tbs-drivers.tar.bz2
+
+
+echo "unpack sources... \n\n\n"
+
+  tar xjvf linux-tbs-drivers.tar.bz2
+  chmod -R u+rwX linux-tbs-drivers/*
+  mv linux-tbs-drivers/ tbs-${PKG_VERSION}/
+
+
+echo "remove x86... \n\n\n"
+  rm tbs-${PKG_VERSION}/v4l/*.o.x86
+  rm tbs-${PKG_VERSION}/v4l/*.o.x86_r3
+
+
+echo "\n\n\n tbs-${PKG_VERSION}.tar.xz compress sources... \n\n\n"
+  tar cvJf ../tbs-${PKG_VERSION}.tar.xz tbs-${PKG_VERSION}
+  
+
+echo "\n\n\n tbs-dvbc-${PKG_VERSION}.tar.xz compress sources... \n\n\n"
+  mv tbs-${PKG_VERSION}/ tbs-dvbc-${PKG_VERSION}/
+  tar cvJf ../tbs-dvbc-${PKG_VERSION}.tar.xz tbs-dvbc-${PKG_VERSION}
+
+
+echo "##################"
+echo " remove leftovers "
+echo "##################"
+   cd ..
+   rm -rf tbs/

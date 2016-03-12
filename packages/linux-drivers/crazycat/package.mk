@@ -1,6 +1,6 @@
 ################################################################################
 #      This file is part of OpenELEC - http://www.openelec.tv
-#      Copyright (C) 2009-2016 Stephan Raue (stephan@openelec.tv)
+#      Copyright (C) 2009-2014 Stephan Raue (stephan@openelec.tv)
 #
 #  OpenELEC is free software: you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -16,26 +16,28 @@
 #  along with OpenELEC.  If not, see <http://www.gnu.org/licenses/>.
 ################################################################################
 
-PKG_NAME="dvb-firmware"
-PKG_VERSION="CvH-1.11"
+PKG_NAME="crazycat"
+PKG_VERSION="c8714ba"
 PKG_REV="1"
-PKG_ARCH="any"
-PKG_LICENSE="Free-to-use"
-PKG_SITE="https://github.com/CvH/dvb-firmware"
-PKG_URL="http://www.mycvh.de/openelec/$PKG_NAME/$PKG_NAME-$PKG_VERSION.tar.xz"
-PKG_DEPENDS_TARGET="toolchain"
+PKG_ARCH="x86_64"
+PKG_LICENSE="GPL"
+PKG_SITE="https://bitbucket.org/CrazyCat/linux-tbs-drivers/"
+PKG_URL="http://mycvh.de/openelec/$PKG_NAME/$PKG_NAME-${PKG_VERSION}.tar.xz"
+PKG_DEPENDS_TARGET="toolchain linux"
 PKG_PRIORITY="optional"
-PKG_SECTION="firmware"
-PKG_SHORTDESC="dvb-firmware: firmwares for various DVB drivers"
-PKG_LONGDESC="dvb-firmware: firmwares for various DVB drivers"
-
-PKG_IS_ADDON="no"
+PKG_SECTION="driver"
+PKG_SHORTDESC="Linux TBS tuner drivers + additions from CrazyCat"
+PKG_LONGDESC="Linux TBS tuner drivers + additions from CrazyCat"
 PKG_AUTORECONF="no"
 
 make_target() {
-  : # nothing todo
+  cd $ROOT/$PKG_BUILD
+  ./v4l/tbs-x86_64.sh
+  LDFLAGS="" make DIR=$(kernel_path) prepare
+  LDFLAGS="" make DIR=$(kernel_path)
 }
 
 makeinstall_target() {
-  DESTDIR=$INSTALL ./install
+  mkdir -p $INSTALL/lib/modules/$(get_module_dir)/updates/tbs
+  find $ROOT/$PKG_BUILD/ -name \*.ko -exec cp {} $INSTALL/lib/modules/$(get_module_dir)/updates/tbs \;
 }
